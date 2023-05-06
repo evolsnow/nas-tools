@@ -366,6 +366,7 @@ class BrushTask(object):
                     torrent_name = torrent.get('name')
                     # 下载器名称
                     downlaod_name = downloader_cfg.get("name")
+                    log.warn("【Brush】point1")
                     # 种子大小
                     torrent_size = StringUtils.str_filesize(torrent_info.get("total_size"))
                     # 已下载
@@ -386,6 +387,7 @@ class BrushTask(object):
                     avg_upspeed = torrent_info.get("avg_upspeed")
                     # 未活跃时间
                     iatime = torrent_info.get("iatime")
+                    log.warn("【Brush】point2")
                     # 判断是否符合删除条件
                     need_delete, delete_type = self.__check_remove_rule(remove_rule=remove_rule,
                                                                         seeding_time=seeding_time,
