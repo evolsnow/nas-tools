@@ -300,7 +300,9 @@ class BrushTask(object):
             self.message.send_brushtask_remove_message(title=_msg_title, text=_msg_text)
 
         # 遍历所有任务
+
         for taskid, taskinfo in self._brush_tasks.items():
+            log.info("【Brush】准备删除 %s" % taskid)
             if taskinfo.get("state") == 'N':
                 continue
             try:
@@ -321,8 +323,10 @@ class BrushTask(object):
                 # 当前任务种子详情
                 task_torrents = self.get_brushtask_torrents(taskid)
                 torrent_ids = [item.DOWNLOAD_ID for item in task_torrents if item.DOWNLOAD_ID]
+                log.info("【Brush】%s torrent_ids 数据：%s" % (taskid, len(torrent_ids)))
                 # 避免种子被全删，没有种子ID的不处理
                 if not torrent_ids:
+                    log.info(" no torrent ids")
                     continue
                 # 下载器参数
                 downloader_cfg = self.downloader.get_downloader_conf(downloader_id)
@@ -813,6 +817,7 @@ class BrushTask(object):
         :param avg_upspeed: 上传平均速度
         :param iatime: 未活动时间
         """
+        log.info("【Brush】check_remove_rule 数据：%s %d %f %f %f %f %f" % (remove_rule,seeding_time,ratio,uploaded,dltime,avg_upspeed,iatime))
         if not remove_rule:
             return False
         try:
