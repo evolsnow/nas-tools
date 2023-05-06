@@ -355,6 +355,7 @@ class BrushTask(object):
                     log.warn("【Brush】checking %s " % torrent)
                     torrent_info = self.__get_torrent_dict(downloader_type=downloader_type,
                                                            torrent=torrent)
+                    log.warn("【Brush】got %s " % torrent_info)
                     # ID
                     torrent_id = torrent_info.get("id")
                     # 总上传量
