@@ -393,6 +393,7 @@ class BrushTask(object):
                                                                         uploaded=uploaded,
                                                                         avg_upspeed=avg_upspeed,
                                                                         iatime=iatime)
+                    log.warn("【Brush】need_delete %s %s" % (need_delete, delete_type))
                     if need_delete:
                         log.info(
                             "【Brush】%s 做种达到删种条件：%s，删除任务..." % (torrent_name, delete_type.value))
@@ -823,8 +824,10 @@ class BrushTask(object):
         """
         log.info("【Brush】check_remove_rule 数据：%s %d %f %f %f %f %f" % (remove_rule,seeding_time,ratio,uploaded,dltime,avg_upspeed,iatime))
         if not remove_rule:
+            log.info("【Brush】not check_remove_rule")
             return False
         try:
+            log.info("【Brush】try check_remove_rule")
             if remove_rule.get("time") and seeding_time:
                 rule_times = remove_rule.get("time").split("#")
                 if rule_times[0]:
