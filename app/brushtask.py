@@ -824,7 +824,8 @@ class BrushTask(object):
         :param avg_upspeed: 上传平均速度
         :param iatime: 未活动时间
         """
-        log.info("【Brush】check_remove_rule 数据：%s %d %f %f %f %f %f" % (remove_rule,seeding_time,ratio,uploaded,dltime,avg_upspeed,iatime))
+        log.info("【Brush】point3")
+        log.info("【Brush】check_remove_rule 数据：%s" % remove_rule)
         if not remove_rule:
             log.info("【Brush】not check_remove_rule")
             return False
@@ -867,6 +868,7 @@ class BrushTask(object):
                         if float(iatime) > float(rule_times[1]) * 3600:
                             return True, BrushDeleteType.IATIME
         except Exception as err:
+            log.info("err %s" % err)
             ExceptionUtils.exception_traceback(err)
         return False, BrushDeleteType.NOTDELETE
 
