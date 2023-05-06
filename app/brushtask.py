@@ -339,6 +339,8 @@ class BrushTask(object):
                 torrents = self.downloader.get_completed_torrents(downloader_id=downloader_id,
                                                                   ids=torrent_ids)
                 # 有错误不处理了，避免误删种子
+                log.warn("【Brush】拿到 %d 完成种子" % len(torrents))
+                # 有错误不处理了，避免误删种子
                 if torrents is None:
                     log.warn("【Brush】任务 %s 获取下载完成种子失败" % task_name)
                     continue
@@ -350,6 +352,7 @@ class BrushTask(object):
                               else str(torrent.hashString)) for torrent in torrents])))
                 # 完成的种子
                 for torrent in torrents:
+                    log.warn("【Brush】checking %s " % torrent)
                     torrent_info = self.__get_torrent_dict(downloader_type=downloader_type,
                                                            torrent=torrent)
                     # ID
